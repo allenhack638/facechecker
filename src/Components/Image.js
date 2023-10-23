@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { getFavicon, checkImage } from "./Functions";
-import axios from "axios";
 
 function Image({ item }) {
-  const [faviconSrc, setFaviconSrc] = useState(null);
-  console.log("item", item);
+  const [faviconSrc, setFaviconSrc] = useState(
+    require("./../Assets/loading image.png")
+  );
   useEffect(() => {
     async function fetchFavicon() {
       try {

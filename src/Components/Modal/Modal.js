@@ -1,6 +1,5 @@
 import React from "react";
 import "./Modal.css";
-import { getFavicon, checkImage } from "../Functions";
 import Image from "../Image";
 const Modal = ({ data, onClose }) => {
   console.log(data);
@@ -17,15 +16,6 @@ const Modal = ({ data, onClose }) => {
               <img src={item.base64} alt={item.guid} srcSet="" />
               <div className="content-items">
                 <Image item={item.url} />
-                {/* <img
-                  src={
-                    checkImage(getFavicon(item.url))
-                      ? getFavicon(item.url)
-                      : "https://cdn-icons-png.flaticon.com/512/5602/5602732.png"
-                  }
-                  alt="Profile Icon"
-                  className="favi-icon"
-                /> */}
                 <a
                   href={item.url}
                   className="item-url"
