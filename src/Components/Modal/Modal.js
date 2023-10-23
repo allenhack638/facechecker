@@ -1,7 +1,9 @@
 import React from "react";
 import "./Modal.css";
-
-const Modal = ({ onClose }) => {
+import { getFavicon, checkImage } from "../Functions";
+import Image from "../Image";
+const Modal = ({ data, onClose }) => {
+  console.log(data);
   return (
     <div className="modal">
       <div className="modal-content">
@@ -9,90 +11,33 @@ const Modal = ({ onClose }) => {
           &times;
         </button>
         <h1>Fetched Results</h1>
-        <ul class="auto-grid">
-          <a className="image_item">
-            <img
-              src="https://t4.ftcdn.net/jpg/04/31/64/75/240_F_431647519_usrbQ8Z983hTYe8zgA7t1XVc5fEtqcpa.jpg"
-              alt=""
-              srcset=""
-            />
-            <div className="content-items">
-              <div className="link">Hello World</div>
-              <div className="score">94</div>
+        <ul className="auto-grid">
+          {data.map((item) => (
+            <div href="#" className="image_item" key={item.indexDB}>
+              <img src={item.base64} alt={item.guid} srcSet="" />
+              <div className="content-items">
+                <Image item={item.url} />
+                {/* <img
+                  src={
+                    checkImage(getFavicon(item.url))
+                      ? getFavicon(item.url)
+                      : "https://cdn-icons-png.flaticon.com/512/5602/5602732.png"
+                  }
+                  alt="Profile Icon"
+                  className="favi-icon"
+                /> */}
+                <a
+                  href={item.url}
+                  className="item-url"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {item.url}
+                </a>
+                <div className="score">{item.score}</div>
+              </div>
             </div>
-          </a>
-          <a className="image_item">
-            <img
-              src="https://t4.ftcdn.net/jpg/04/31/64/75/240_F_431647519_usrbQ8Z983hTYe8zgA7t1XVc5fEtqcpa.jpg"
-              alt=""
-              srcset=""
-            />
-            <div>Hello World</div>
-          </a>
-          <a className="image_item">
-            <img
-              src="https://t4.ftcdn.net/jpg/04/31/64/75/240_F_431647519_usrbQ8Z983hTYe8zgA7t1XVc5fEtqcpa.jpg"
-              alt=""
-              srcset=""
-            />
-            <div>Hello World</div>
-          </a>
-          <a className="image_item">
-            <img
-              src="https://t4.ftcdn.net/jpg/04/31/64/75/240_F_431647519_usrbQ8Z983hTYe8zgA7t1XVc5fEtqcpa.jpg"
-              alt=""
-              srcset=""
-            />
-            <div>Hello World</div>
-          </a>
-          <a className="image_item">
-            <img
-              src="https://t4.ftcdn.net/jpg/04/31/64/75/240_F_431647519_usrbQ8Z983hTYe8zgA7t1XVc5fEtqcpa.jpg"
-              alt=""
-              srcset=""
-            />
-            <div>Hello World</div>
-          </a>
-          <a className="image_item">
-            <img
-              src="https://t4.ftcdn.net/jpg/04/31/64/75/240_F_431647519_usrbQ8Z983hTYe8zgA7t1XVc5fEtqcpa.jpg"
-              alt=""
-              srcset=""
-            />
-            <div>Hello World</div>
-          </a>
-          <a className="image_item">
-            <img
-              src="https://t4.ftcdn.net/jpg/04/31/64/75/240_F_431647519_usrbQ8Z983hTYe8zgA7t1XVc5fEtqcpa.jpg"
-              alt=""
-              srcset=""
-            />
-            <div>Hello World</div>
-          </a>
-          <a className="image_item">
-            <img
-              src="https://t4.ftcdn.net/jpg/04/31/64/75/240_F_431647519_usrbQ8Z983hTYe8zgA7t1XVc5fEtqcpa.jpg"
-              alt=""
-              srcset=""
-            />
-            <div>Hello World</div>
-          </a>
-          <a className="image_item">
-            <img
-              src="https://t4.ftcdn.net/jpg/04/31/64/75/240_F_431647519_usrbQ8Z983hTYe8zgA7t1XVc5fEtqcpa.jpg"
-              alt=""
-              srcset=""
-            />
-            <div>Hello World</div>
-          </a>
-          <a className="image_item">
-            <img
-              src="https://t4.ftcdn.net/jpg/04/31/64/75/240_F_431647519_usrbQ8Z983hTYe8zgA7t1XVc5fEtqcpa.jpg"
-              alt=""
-              srcset=""
-            />
-            <div>Hello World</div>
-          </a>
+          ))}
         </ul>
       </div>
     </div>

@@ -69,7 +69,6 @@ const search_by_face = async (image_file) => {
 const run = async (fileLocation) => {
   // Search the Internet by face
   const [error, urls_images] = await search_by_face(`Images/${fileLocation}`);
-
   if (urls_images) {
     urls_images.forEach((im) => {
       const score = im.score; // 0 to 100 score how well the face is matching found image
@@ -77,8 +76,11 @@ const run = async (fileLocation) => {
       const image_base64 = im.base64; // thumbnail image encoded as base64 string
       console.log(`${score} ${url} ${image_base64.slice(0, 32)}...`);
     });
+    console.log(error, urls_images);
+    return [error, urls_images];
   } else {
-    console.log("error", error);
+    console.log(error);
+    return [error, null];
   }
 };
 app.use(cors());
@@ -92,7 +94,6 @@ const storage = multer.diskStorage({
     cb(null, "Images");
   },
   filename: function (req, file, cb) {
-    // console.log(file);
     fileLocation = file.originalname;
     cb(null, `${file.originalname}`);
   },
@@ -100,8 +101,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.post("/upload", upload.single("image"), async (req, res) => {
-  run(fileLocation);
-  res.send("Image Uploaded!!");
+  const response = await run(fileLocation);
+  res.json(response);
 });
 
 app.listen(5000, () => {
