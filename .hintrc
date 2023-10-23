@@ -3,11 +3,11 @@
     "development"
   ],
   "hints": {
-    "compat-api/css": [
+    "compat-api/html": [
       "default",
       {
         "ignore": [
-          "aspect-ratio"
+          "meta[name=theme-color]"
         ]
       }
     ]

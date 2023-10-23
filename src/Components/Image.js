@@ -27,7 +27,7 @@ function Image({ item }) {
     }
 
     fetchFavicon();
-  }, [item.url]);
+  }, [item]);
 
   return <img src={faviconSrc} alt="Profile Icon" className="favi-icon" />;
 }

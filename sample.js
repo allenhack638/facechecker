@@ -3,7 +3,6 @@ const cors = require("cors");
 const axios = require("axios");
 const app = express();
 const multer = require("multer");
-const path = require("path");
 const FormData = require("form-data");
 const fs = require("fs");
 
@@ -37,6 +36,20 @@ const search_by_face = async (image_file) => {
   });
   response = response.data;
 
+  if (response) {
+    try {
+      fs.unlink(`Images/${fileLocation}`, (err) => {
+        if (err) {
+          console.error(`Error deleting image file: ${err}`);
+        } else {
+          console.log(`Image file deleted: ${fileLocation}`);
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   if (response.error) {
     return [`${response.error} (${response.code})`, null];
   }
@@ -67,7 +80,6 @@ const search_by_face = async (image_file) => {
 };
 
 const run = async (fileLocation) => {
-  // Search the Internet by face
   const [error, urls_images] = await search_by_face(`Images/${fileLocation}`);
   if (urls_images) {
     urls_images.forEach((im) => {
@@ -76,7 +88,6 @@ const run = async (fileLocation) => {
       const image_base64 = im.base64; // thumbnail image encoded as base64 string
       console.log(`${score} ${url} ${image_base64.slice(0, 32)}...`);
     });
-    console.log(error, urls_images);
     return [error, urls_images];
   } else {
     console.log(error);

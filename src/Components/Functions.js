@@ -1,7 +1,5 @@
 function extractDomainFromUrl(url) {
-  const domainMatch = url.match(
-    /^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n]+)/im
-  );
+  const domainMatch = url.match(/^(?:https?:\/\/)?(?:www\.)?([^:/]+)/i);
 
   if (domainMatch && domainMatch[1]) {
     return domainMatch[1];
